@@ -1,0 +1,39 @@
+{
+  "sns": [
+    {
+      "flg": "1",
+      "id": "twitter",
+      "name": "twitter",
+      "url": "https://twitter.com/MiltWitch",
+      "message": ""
+    },
+    {
+      "flg": "1",
+      "id": "facebook",
+      "name": "facebook",
+      "url": "https://www.facebook.com/kimura.masami",
+      "message": ""
+    },
+    {
+      "flg": "1",
+      "id": "line",
+      "name": "LINE",
+      "url": "",
+      "message": "みせないよ"
+    },
+    {
+      "flg": "1",
+      "id": "instagram",
+      "name": "Instagram",
+      "url": "",
+      "message": "アカウントないよ"
+    },
+    {
+      "flg": "1",
+      "id": "github",
+      "name": "GitHub",
+      "url": "https://github.com/kim0ran",
+      "message": ""
+    }
+  ]
+}
