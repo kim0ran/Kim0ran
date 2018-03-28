@@ -29,7 +29,6 @@
         e.preventDefault();
         if(!that.isAnimate) {
           that.smoothScroll($(this).attr('href'));
-          that.isAnimate = false;
         }
         return false;
       });
@@ -45,7 +44,6 @@
       return this;
     };
     proto.smoothScroll = function(href) {
-      this.isAnimate = true;
       var $target = $(href === '#' || href === '' ? 'html' : href);
       if($target.length > 0) {
         var position = $target.offset().top;

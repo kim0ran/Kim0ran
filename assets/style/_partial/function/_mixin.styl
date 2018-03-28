@@ -1,3 +1,27 @@
 /*----------------------------------------------------------
  mixin
 ------------------------------------------------------------*/
+
+/* icon
+--------------------------------------------------*/
+
+mixin--arrows(colors)
+  position: relative
+  &:after
+    content: ""
+    display: block
+    position: absolute
+    transform: rotate(45deg)
+    border-style: solid
+    border-color: colors
+
+mixin--arrow-right(size, colors, right)
+  mixin--arrows(colors)
+  &:after
+    top: 50%
+    right: right
+    width: size
+    height: size
+    margin-top: -(size/1.7)
+    border-width: 1px 1px 0 0
+

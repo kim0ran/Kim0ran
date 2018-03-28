@@ -1,3 +1,60 @@
 /*----------------------------------------------------------
  button
 ------------------------------------------------------------*/
+
+.btn
+
+  // 遷移ボタン
+  &-more
+    display: inline-block
+    min-width: 180px
+    padding: 10px
+    border-radius: 2px
+    box-sizing: border-box
+    line-height: 1em
+    font-weight: bold
+    font-family: $font_family_brandon
+    &--blue
+      @extend .btn-more
+      border: 1px solid #597abd
+      mixin--arrow-right(8px, #039, 10px)
+    &--white
+      @extend .btn-more
+      border: 1px solid #a6b8db
+      mixin--arrow-right(8px, #fff, 10px)
+      &:link, &:visited
+        color: #fff
+
+  // アクションボタン
+  &-action
+    display: inline-block
+    min-width: 150px
+    padding: 12px 5px
+    background: #6d92da
+    border-radius: 20px
+    font-size: 16px
+    line-height: 1em
+    box-sizing: border-box
+    color: #fff
+
+  // ページトップボタン
+  &--pagetop
+    display: block
+    position: relative
+    width: 100%
+    height: 50px
+    border-top: 1px solid #eee
+    border-bottom: 1px solid #eee
+    text-indent: -9999px
+    &:after
+      content: ""
+      display: block
+      position: absolute
+      top: 50%
+      left: 50%
+      width: 15px
+      height: 15px
+      margin: -5px 0 0 -7px
+      border-top: 3px solid #aaa
+      border-left: 3px solid #aaa
+      transform: rotate(45deg)

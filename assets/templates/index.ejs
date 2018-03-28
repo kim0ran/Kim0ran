@@ -11,15 +11,174 @@
 
   <%- include(pathPartials + 'header') %>
 
+  <%- include(pathPartials + 'globalNav') %>
+
   <main class="main">
 
+    <section class="section section--bg concept" id="">
+      <div class="concept__inner inner">
+        <header class="section_header">
+          <h2 class="section_header__title">CONCEPT</h2>
+          <p class="section_header__caption">Be Myself</p>
+        </header>
+        <p class="concept__lead">
+          なんとなく運営している個人サイト。
+          特にコンセプトなんてものはなく、一貫性のない内容のブログやら、意味のわからないイラストなどをとりあえず載せています。
+        </p>
+        <p class="concept__lead">まぁ、自分らしくあればいいなと。</p>
+      </div>
+    </section>
+  
+    <section class="section blog" id="">
+      <div class="blog__inner inner">
+        <header class="section_header">
+          <h2 class="section_header__title">BLOG</h2>
+          <p class="section_header__caption">NEW ENTRY</p>
+        </header>
+        <ul class="blog__list">
+          <li>
+            <a href="#">
+              <time>2017.5.5</time>
+              <p>こんなこと書いたよ</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <time>2017.5.5</time>
+              <p>こんなこと書いたよこんなこと書いたよこんなこと書いたよこんなこと書いたよ</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <time>2017.5.5</time>
+              <p>こんなこと書いたよ</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <time>2017.5.5</time>
+              <p>こんなこと書いたよこんなこと書いたよこんなこと書いたよこんなこと書いたよ</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <time>2017.5.5</time>
+              <p>こんなこと書いたよこんなこと書いたよこんなこと書いたよこんなこと書いたよ</p>
+            </a>
+          </li>
+        </ul>
+        <div class="section__btnOuter">
+          <a href="" class="btn-more--blue">MORE</a>
+        </div>
+      </div>
+    </section>
 
+    <section class="section section--bg gallery" id="">
+      <div class="gallery__inner inner">
+        <header class="section_header">
+          <h2 class="section_header__title">GALLERY</h2>
+          <p class="section_header__caption">Pickup Illustration</p>
+        </header>
+        <div class="section__btnOuter">
+          <a href="" class="btn-more--white">MORE</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section profile" id="">
+      <div class="profile__inner inner">
+        <header class="section_header">
+          <h2 class="section_header__title">PROFILE</h2>
+          <p class="section_header__caption">きもらん</p>
+        </header>
+        <figure class="profile__image">
+          <img src="/common/img/profile_img.png" alt="きもらん">
+        </figure>
+        <p class="profile__lead">
+          メインはフロントエンドエンジニア<br>
+          ディレクション、ビジュアルデザインの経験もあるユーティリティプレイヤー<br>
+          わかりやすく言うとWebデザイナー<br>
+          元グラフィックデザイナー兼イラストレーター<br>
+          Excelが大好き
+        </p>
+        <div class="profile_detail">
+          <ul class="profile_detail__btnList">
+            <li class="active">仕事</li>
+            <li>個人</li>
+            <li>その他</li>
+          </ul>
+          <div class="profile_detail_content">
+            <div class="">
+              <dl class="profile_detail_content__list">
+                <dt>Jobs</dt>
+                <dd>フロントエンドエンジニア</dd>
+                <dt>Skill</dt>
+                <dd>
+                  <ul>
+                    <li>(X)HTML<small>（HTML4〜5、XHTML1.01）</small></li>
+                    <li>CSS<small>（Level1〜3）</small></li>
+                    <li>JavaScript<small>（jQuery）</small></li>
+                    <li>その他<small>（ejs、stylus、Sass、gulp、Grunt）</small></li>
+                  </ul>
+                </dd>
+                <dt>Software</dt>
+                <dd>
+                  <ul>
+                    <li>Adobe Photoshop</li>
+                    <li>Adobe Illustrator</li>
+                    <li>Microsoft Excel</li>
+                  </ul>
+                </dd>
+              </dl>
+            </div>
+            <div class="">
+              <dl class="">
+                <dt></dt>
+                <dd></dd>
+              </dl>
+            </div>
+            <div class="">
+              <dl class="">
+                <dt></dt>
+                <dd></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--bg contact" id="">
+      <div class="contact__inner inner">
+        <header class="section_header">
+          <h2 class="section_header__title">CONTACT</h2>
+          <p class="section_header__caption">ご意見やご感想、その他お問い合わせにつきましては以下のフォームにてお願い致します</p>
+        </header>
+        <p class="contact__notes"></p>
+        <form class="form">
+          <ul class="form__list">
+            <li><input type="text" id="" name="" placeholder="お名前" value="" class="form__input--text"></li>
+            <li><input type="text" id="" name="" placeholder="メールアドレス" value="" class="form__input--text"></li>
+            <li><textarea placeholder="お問い合わせ内容" class="form__textarea"></textarea></li>
+          </ul>
+          <div class="section__btnOuter">
+            <button type="submit" class="btn-action">内容を確認する</button>
+          </div>
+        </form>
+      </div>
+    </section>
 
   </main>
 
   <%- include(pathPartials + 'footer') %>
 
 </div><!--/.page -->
+
+<div class="modal">
+  <div class="modal__inner">
+    
+  </div>
+</div>
 
 <%- include(pathPartials + 'common_js') %>
 <script src="/common/js/sub/top.js"></script>

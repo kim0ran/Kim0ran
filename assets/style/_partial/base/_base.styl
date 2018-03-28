@@ -1,4 +1,35 @@
 /*----------------------------------------------------------
+ fonts
+------------------------------------------------------------*/
+
+/* English */
+@font-face
+  font-family: "Brandon"
+  font-weight: normal
+  src: url("/common/fonts/Brandon_light.woff") format("woff"),
+    url("/common/fonts/Brandon_light.ttf") format("truetype")
+@font-face
+  font-family: "Brandon"
+  font-weight: bold
+  src: url("/common/fonts/Brandon_med.woff") format("woff"),
+    url("/common/fonts/Brandon_med.ttf") format("truetype");
+
+/* Japanese */
+@font-face
+  font-family: "Noto Sans Japanese"
+  font-weight: normal
+  src: url("/common/fonts/NotoSansJP-Light.woff2") format("woff2"),
+    url("/common/fonts/NotoSansJP-Light.woff") format("woff"),
+    url("/common/fonts/NotoSansJP-Light.otf") format("opentype")
+@font-face
+  font-family: "Noto Sans Japanese"
+  font-weight: bold
+  src: url("/common/fonts/NotoSansJP-Regular.woff2") format("woff2"),
+      url("/common/fonts/NotoSansJP-Regular.woff") format("woff"),
+      url("/common/fonts/NotoSansJP-Regular.otf") format("opentype")
+
+
+/*----------------------------------------------------------
  Base
 ------------------------------------------------------------*/
 
@@ -6,13 +37,15 @@ html
   overflow-y: scroll
 
 body, input, select, textarea
-  font-size: $font_size_default
+  font-size: $font_size_default_sp
   color: $color_text_default
-  font-family: $font_family_pc
+  text-align: center
+  font-family: $font_family_sp
 
-@media $mq-mobile
+@media $mq-pc
   body, input, select, textarea
-    font-size: 100%
+    font-size: $font_size_default_pc
+    font-family: $font_family_pc
 
 h1, h2, h3, h4, h5, h6, th, td, small
   font-size: 100%
@@ -30,9 +63,14 @@ input, select, textarea
 a:link,
 a:visited
   color: $color_text_link
-  text-decoration: underline
+  text-decoration: none
 
 a:active,
 a:hover
   color: $color_text_link_hover
   text-decoration: none
+
+@media $mq-pc
+  a:link,
+  a:visited
+    text-decoration: underline

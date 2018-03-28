@@ -33,7 +33,7 @@ module.exports = {
           'assets/%type%/templates/*.ejs',
           '!assets/%type%/templates/_*/*.ejs'
         ],
-        watch: ['assets/%type%/templates/*.ejs'],
+        watch: ['assets/%type%/templates/**/*.ejs'],
         dest: 'dist/%type%'
       },
       js: {
