@@ -7,6 +7,7 @@
     var constructor = function(el) {
       this.$el = {};
       this.$anchor = {};
+      this.globalNavView = {};
       this.isAnimate = false;
       this.scrollSpeed = 500;
       this.init(el);
@@ -15,12 +16,22 @@
     var proto = constructor.prototype;
     proto.init = function(el) {
       this.setEl(el);
+      this.setChildViewInstance();
       this.setEvents();
       return this;
     };
     proto.setEl = function(el) {
       this.$el = $(el);
       this.$anchor = this.$el.find('a[href^="#"]');
+      return this;
+    };
+    proto.setChildViewInstance = function() {
+
+      /* グローバルナビ */
+      this.globalNavView = new app.views.GlobalNavView();
+      this.globalNavView.parentViewEl = this.$el;
+      this.globalNavView.init({ el: '#GlobalNavView' });
+
       return this;
     };
     proto.setEvents = function() {
@@ -58,6 +69,181 @@
       return this;
     };
     proto.onResize = function() {
+      return this;
+    };
+    return constructor;
+  })();
+
+  /**
+   * グローバルナビ
+   */
+  app.views.GlobalNavView = (function() {
+    var constructor = function() {
+      this.$el = {};
+      this.$navListEl = {};
+      this.$navAnchorEl = {};
+      this.$toggleTriggerEl = {};
+      this.classOpened = 'active';
+      this.isAnimate = false;
+      this.isOpen = false;
+      this.offsetTopOpened = 0;
+      this.speed = 500;
+      return this;
+    };
+    var proto = constructor.prototype;
+    proto.init = function(args) {
+      this.setEl(args.el);
+      this.setStyle();
+      this.setEvents();
+      return this;
+    };
+    proto.setEl = function(el) {
+      this.$el = $(el);
+      this.$navListEl = this.$el.find('.js-globalNavList');
+      this.$navAnchorEl = this.$navListEl.find('a');
+      this.$toggleTriggerEl = $('.js-globalNavToggleTrigger');
+      return this;
+    };
+    proto.setStyle = function() {
+      this.$navListEl.hide();
+      return this;
+    };
+    proto.setEvents = function() {
+      var that = this;
+      this.$toggleTriggerEl.on('click', function() {
+        that.onClickToggleTrigger();
+      });
+      this.$el.on('click', function() {
+        that.onClickToggleTrigger();
+      });
+      this.$el.children().on('click', function(e) {
+        e.stopPropagation();
+      });
+      this.$navAnchorEl.on('click', function() {
+        that.onClickToggleTrigger();
+      });
+      return this;
+    };
+    proto.onClickToggleTrigger = function() {
+      if(!this.isAnimate) {
+        if(this.isOpen) {
+          this.animateCloseNav();
+        } else {
+          this.animateOpenNav();
+        }
+        this.isAnimate = false;
+      }
+      return this;
+    };
+    proto.animateOpenNav = function() {
+      var that = this;
+      this.isAnimate = true;
+      this.offsetTopOpened = $(window).scrollTop();
+      this.parentViewEl.css({
+        position: 'fixed',
+        top: -this.offsetTopOpened,
+        height: '100vh'
+      });
+      this.$el.addClass(this.classOpened);
+      this.$navListEl.slideToggle(this.speed, function() {
+        that.isOpen = true;
+      });
+      return this;
+    };
+    proto.animateCloseNav = function() {
+      var that = this;
+      this.isAnimate = true;
+      this.parentViewEl.css({
+        position: 'static',
+        top: 'auto',
+        height: 'auto'
+      });
+      $(window).scrollTop(this.offsetTopOpened);
+      this.$navListEl.slideToggle(this.speed, function() {
+        that.$el.removeClass(that.classOpened);
+        that.isOpen = false;
+      });
+      return this;
+    };
+    return constructor;
+  })();
+
+  /**
+   * モーダル
+   */
+  app.views.ModalView = (function() {
+    var constructor = function() {
+      this.$el = {};
+      this.$triggerCloseEl = {};
+      this.$triggerOpenEl = {};
+      this.isOpen = false;
+      this.isAnimate = false;
+      this.$pageEl = {};
+      this.scrollTopOpened = 0;
+      return this;
+    };
+    var proto = constructor.prototype;
+    proto.init = function(args) {
+      this.setEl(args);
+      this.setStyle();
+      this.setEvents();
+      return this;
+    };
+    proto.setStyle = function() {
+      this.$el.hide();
+      return this;
+    };
+    proto.setEl = function(args) {
+      this.$el = $(args.el);
+      this.$triggerCloseEl = this.$el.find('.js-modalBtnClose');
+      this.$triggerOpenEl = $(args.triggerOpenEl);
+      this.$pageEl = $('.page');
+      return this;
+    };
+    proto.setEvents = function() {
+      var that = this;
+      this.$triggerOpenEl.on('click', function() {
+        that.onEventOpenModal();
+      });
+      this.$triggerCloseEl.on('click', function() {
+        that.onEventCloseModal();
+      });
+      return this;
+    };
+    proto.onEventOpenModal = function() {
+      if(!this.isAnimate) {
+        this.openModal();
+        this.isAnimate = false;
+      }
+      return this;
+    };
+    proto.onEventCloseModal = function() {
+      if(!this.isAnimate) {
+        this.closeModal();
+        this.isAnimate = false;
+      }
+      return this;
+    };
+    proto.openModal = function() {
+      this.isAnimate = true;
+      this.scrollTopOpened = $(window).scrollTop();
+      this.$pageEl.css({
+        position: 'fixed',
+        top: -this.scrollTopOpened,
+        width: '100%'
+      });
+      this.$el.fadeIn();
+      return this;
+    };
+    proto.closeModal = function() {
+      this.isAnimate = true;
+      this.$el.fadeOut();
+      this.$pageEl.css({
+        position: 'static',
+        top: 'auto',
+        width: 'auto'
+      });
+      $(window).scrollTop(this.scrollTopOpened);
       return this;
     };
     return constructor;

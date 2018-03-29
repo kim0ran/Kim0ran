@@ -3,6 +3,7 @@
 <html lang="ja">
 <head>
 <%- include(pathPartials + 'head', { title: pageTitle }) %>
+<link rel="stylesheet" type="text/css" href="/common/css/lib/slick.css">
 <link rel="stylesheet" type="text/css" href="/common/css/top.css">
 </head>
 <body>
@@ -15,7 +16,7 @@
 
   <main class="main">
 
-    <section class="section section--bg concept" id="">
+    <section class="section section--bg concept" id="ConceptView">
       <div class="concept__inner inner">
         <header class="section_header">
           <h2 class="section_header__title">CONCEPT</h2>
@@ -29,7 +30,7 @@
       </div>
     </section>
   
-    <section class="section blog" id="">
+    <section class="section blog" id="BlogView">
       <div class="blog__inner inner">
         <header class="section_header">
           <h2 class="section_header__title">BLOG</h2>
@@ -73,19 +74,31 @@
       </div>
     </section>
 
-    <section class="section section--bg gallery" id="">
+    <section class="section section--bg gallery" id="GalleryView">
       <div class="gallery__inner inner">
         <header class="section_header">
           <h2 class="section_header__title">GALLERY</h2>
           <p class="section_header__caption">Pickup Illustration</p>
         </header>
+        <div class="gallery__area">
+          <div class="gallery__list--outer">
+            <ul class="gallery__list js-galleryCarousel">
+              <li><a href=""><img src="https://scontent-nrt1-1.cdninstagram.com/vp/a354475da6490a6599776c9ac904e4c6/5B6D248F/t51.2885-15/e35/29415255_1642203955856072_923434564393631744_n.jpg"></a></li>
+              <li><a href=""><img src="https://scontent-nrt1-1.cdninstagram.com/vp/898de7ceb990d018bfc96cbb332df8a2/5B700D97/t51.2885-15/e35/29714981_199181074017073_7589517811181944832_n.jpg"></a></li>
+              <li><a href=""><img src="https://scontent-nrt1-1.cdninstagram.com/vp/07886991027d43b7c4ec06c22e4e0926/5B38B271/t51.2885-15/e35/29090581_1811758589128903_7478813199471476736_n.jpg"></a></li>
+              <li><a href=""><img src="http://kim0ran.com/test/common/img/profile_img.png"></a></li>
+            </ul>
+          </div>
+          <!-- <p class="gallery__btn gallery__btn--prev js-carouselBtnPrev">前へ</p>
+          <p class="gallery__btn gallery__btn--next js-carouselBtnNext">次へ</p> -->
+        </div>
         <div class="section__btnOuter">
           <a href="" class="btn-more--white">MORE</a>
         </div>
       </div>
     </section>
 
-    <section class="section profile" id="">
+    <section class="section profile" id="ProfileView">
       <div class="profile__inner inner">
         <header class="section_header">
           <h2 class="section_header__title">PROFILE</h2>
@@ -101,15 +114,15 @@
           元グラフィックデザイナー兼イラストレーター<br>
           Excelが大好き
         </p>
-        <div class="profile_detail">
-          <ul class="profile_detail__btnList">
+        <div class="profile_detail js-detailProfile">
+          <ul class="profile_detail__btnList js-switchViewNav">
             <li class="active">仕事</li>
             <li>個人</li>
             <li>その他</li>
           </ul>
-          <div class="profile_detail_content">
-            <div class="">
-              <dl class="profile_detail_content__list">
+          <div class="profile_detail_contents js-switchViewContents">
+            <div class="profile_detail_contents__content">
+              <dl class="profile_detail_contents__list">
                 <dt>Jobs</dt>
                 <dd>フロントエンドエンジニア</dd>
                 <dt>Skill</dt>
@@ -131,16 +144,22 @@
                 </dd>
               </dl>
             </div>
-            <div class="">
-              <dl class="">
-                <dt></dt>
-                <dd></dd>
+            <div class="profile_detail_contents__content">
+              <dl class="profile_detail_contents__list">
+                <dt>Hobby</dt>
+                <dd>DRAGON BALL、ゲーム</dd>
+                <dt>Skill</dt>
+                <dd>コピー</dd>
+                <dt>Personal Color</dt>
+                <dd>コバルトブルー</dd>
+                <dt>Personal Number</dt>
+                <dd>2</dd>
               </dl>
             </div>
-            <div class="">
-              <dl class="">
-                <dt></dt>
-                <dd></dd>
+            <div class="profile_detail_contents__content">
+              <dl class="profile_detail_contents__list">
+                <dt>Other</dt>
+                <dd>なにいれよう</dd>
               </dl>
             </div>
           </div>
@@ -148,23 +167,47 @@
       </div>
     </section>
 
-    <section class="section section--bg contact" id="">
+    <section class="section section--bg contact" id="ContactView">
       <div class="contact__inner inner">
         <header class="section_header">
           <h2 class="section_header__title">CONTACT</h2>
           <p class="section_header__caption">ご意見やご感想、その他お問い合わせにつきましては以下のフォームにてお願い致します</p>
         </header>
         <p class="contact__notes"></p>
-        <form class="form">
+        <div class="form">
           <ul class="form__list">
-            <li><input type="text" id="" name="" placeholder="お名前" value="" class="form__input--text"></li>
-            <li><input type="text" id="" name="" placeholder="メールアドレス" value="" class="form__input--text"></li>
-            <li><textarea placeholder="お問い合わせ内容" class="form__textarea"></textarea></li>
+            <li><input type="text" id="" name="name" placeholder="お名前" value="" class="form__input--text"></li>
+            <li><input type="text" id="" name="mail" placeholder="メールアドレス" value="" class="form__input--text"></li>
+            <li><textarea id="" name="message" placeholder="お問い合わせ内容" class="form__textarea"></textarea></li>
           </ul>
           <div class="section__btnOuter">
-            <button type="submit" class="btn-action">内容を確認する</button>
+            <button type="button" class="btn-action js-contactBtnConfirm">内容を確認する</button>
           </div>
-        </form>
+        </div>
+      </div>
+      <div class="modal contact_modal js-contactModal">
+        <div class="modal__btn--close js-modalBtnClose">閉じる</div>
+        <div class="modal__inner">
+          <p class="modal__title">お問い合わせ内容</p>
+          <div class="modal__main">
+            <form>
+              <input type="hidden" id="" name="name" value="">
+              <input type="hidden" id="" name="mail" value="">
+              <input type="hidden" id="" name="message" value="">
+              <dl class="contact_modal__list">
+                <dt>お名前</dt>
+                <dd data-name="name">あああ　あああ</dd>
+                <dt>メールアドレス</dt>
+                <dd data-name="mail">aaa@bbb.ccc</dd>
+                <dt>お問い合わせ内容</dt>
+                <dd data-name="message">あいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえおかきくけこ</dd>
+              </dl>
+              <div class="contact_modal__btnOuter">
+                <button type="button" class="btn-action js-modalBtnClose">内容を送信する</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -174,13 +217,8 @@
 
 </div><!--/.page -->
 
-<div class="modal">
-  <div class="modal__inner">
-    
-  </div>
-</div>
-
 <%- include(pathPartials + 'common_js') %>
+<script src="/common/js/lib/slick.min.js"></script>
 <script src="/common/js/sub/top.js"></script>
 </body>
 </html>
