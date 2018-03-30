@@ -4,6 +4,7 @@
 
 .header
   position: relative
+  z-index: 3
   height: 100vh
   &__logo
     position: absolute
@@ -80,14 +81,35 @@
           transform: rotate(-45deg)
 
 
+@media $mq-pc
+  .header
+    &__logo
+      top: auto
+      bottom: 130px
+      left: 80px
+      width: 650px
+      margin-left: 0
 
-
-
-
-
-
-
-
-
-
+  .globalNav
+    position: absolute
+    background: #111
+    &__header
+      display: none
+    &__list
+      display: block
+      background: transparent
+      overflow: hidden
+      > li
+        float: left
+        width: 20%
+        border-top-width: 0
+      a
+        padding: 20px 0
+        color: #cbd0e4
+        text-align: center
+        &:hover
+          color: #fff
+        &.active
+          color: #fff
+          text-shadow: 0 0 3px #fff
 

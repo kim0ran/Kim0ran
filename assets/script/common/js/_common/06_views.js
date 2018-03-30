@@ -32,6 +32,10 @@
       this.globalNavView.parentViewEl = this.$el;
       this.globalNavView.init({ el: '#GlobalNavView' });
 
+      /* フッタ */
+      this.footerView = new app.views.FooterView();
+      this.footerView.init({ el: '#FooterView' });
+
       return this;
     };
     proto.setEvents = function() {
@@ -50,7 +54,10 @@
         }
       });
       $(window).on('resize', function() {
-        that.onResize();
+        if(!that.isAnimate) {
+          that.onResize();
+          that.isAnimate = false;
+        }
       });
       return this;
     };
@@ -66,9 +73,14 @@
     };
     proto.onScroll = function(scrollTop) {
       this.isAnimate = true;
+      this.globalNavView.onScroll(scrollTop);
+      this.footerView.onScroll(scrollTop);
       return this;
     };
     proto.onResize = function() {
+      this.isAnimate = true;
+      this.globalNavView.onResize();
+      this.footerView.onResize();
       return this;
     };
     return constructor;
@@ -105,7 +117,17 @@
       return this;
     };
     proto.setStyle = function() {
-      this.$navListEl.hide();
+      if(app.fn.isMediaSp()) {
+        this.$navListEl.hide();
+        this.$el.css({
+          top: 0
+        });
+      } else {
+        this.$navListEl.show();
+        this.$el.css({
+          top: $(window).outerHeight() - this.$el.outerHeight()
+        });
+      }
       return this;
     };
     proto.setEvents = function() {
@@ -120,7 +142,9 @@
         e.stopPropagation();
       });
       this.$navAnchorEl.on('click', function() {
-        that.onClickToggleTrigger();
+        if(app.fn.isMediaSp()) {
+          that.onClickToggleTrigger();
+        }
       });
       return this;
     };
@@ -142,7 +166,7 @@
       this.parentViewEl.css({
         position: 'fixed',
         top: -this.offsetTopOpened,
-        height: '100vh'
+        width: '100%'
       });
       this.$el.addClass(this.classOpened);
       this.$navListEl.slideToggle(this.speed, function() {
@@ -156,13 +180,91 @@
       this.parentViewEl.css({
         position: 'static',
         top: 'auto',
-        height: 'auto'
+        width: 'auto'
       });
       $(window).scrollTop(this.offsetTopOpened);
       this.$navListEl.slideToggle(this.speed, function() {
         that.$el.removeClass(that.classOpened);
         that.isOpen = false;
       });
+      return this;
+    };
+    proto.onScroll = function(scrollTop) {
+      if(!app.fn.isMediaSp()) {
+        if($(window).outerHeight()-this.$el.outerHeight()< scrollTop) {
+          this.$el.css({
+            position: 'fixed',
+            top: 0
+          });
+        } else {
+          this.$el.css({
+            position: 'absolute',
+            top: $(window).outerHeight() - this.$el.outerHeight()
+          });
+        }
+      }
+      return this;
+    };
+    proto.onResize = function() {
+      this.resetStyle();
+      this.setStyle();
+      return this;
+    };
+    proto.resetStyle = function() {
+      if(!app.fn.isMediaSp()) {
+        this.$el.removeClass(this.classOpened);
+        this.parentViewEl.css({
+          position: 'static',
+          top: 'auto',
+          width: 'auto'
+        });
+        this.isOpen = false;
+      }
+      return this;
+    };
+    return constructor;
+  })();
+
+  /**
+   * フッタ
+   */
+  app.views.FooterView = (function() {
+    var constructor = function() {
+      this.$el = {};
+      this.$btnPagetop = {};
+      return this;
+    };
+    var proto = constructor.prototype;
+    proto.init = function(args) {
+      this.setEl(args.el);
+      this.setStyle();
+      return this;
+    };
+    proto.setEl = function(el) {
+      this.$el = $(el);
+      this.$btnPagetop = this.$el.find('.js-btnPagetop');
+      return this;
+    };
+    proto.setStyle = function() {
+      if(!app.fn.isMediaSp()) {
+        this.$btnPagetop.hide();
+      } else {
+        this.$btnPagetop.show();
+      }
+      return this;
+    };
+    proto.onScroll = function(scrollTop) {
+      if(!app.fn.isMediaSp()) {
+        if($(window).outerHeight()*1.5 < scrollTop) {
+          this.$btnPagetop.fadeIn();
+        } else {
+          this.$btnPagetop.fadeOut();
+        }
+      }
+      return this;
+    };
+    proto.onResize = function() {
+      this.setStyle();
       return this;
     };
     return constructor;

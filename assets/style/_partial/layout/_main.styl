@@ -37,6 +37,18 @@
   color: #fff
 
 
+@media $mq-pc
+  .section
+    padding: 100px 0
+    &_header
+      &__title
+        font-size: 42px
+        padding-bottom: 20px
+      &__caption
+        margin-top: 20px
+        font-size: 14px
+
+
 /* concept
 --------------------------------------------------*/
 
@@ -46,6 +58,14 @@
   &__lead
     margin-top: 40px
     font-size: 16px
+
+@media $mq-pc
+  .concept
+    &__lead
+      width: 680px
+      margin: 80px auto 0
+      font-size: 20px
+      line-height: 2em
 
 
 /* blog
@@ -115,18 +135,12 @@
       border-width: 2px 2px 0 0
 
 
-
-
-
 /* profile
 --------------------------------------------------*/
 
 .profile
   &__inner
     padding: 0 15px
-  &__lead
-    margin-top: 30px
-    line-height: 1.8em
   &__image
     width: 190px
     margin: 25px auto 0
@@ -135,6 +149,9 @@
     img
       width: 100%
       height: auto
+  &__lead
+    margin-top: 30px
+    line-height: 1.8em
 
   &_detail
     &__btnList
@@ -176,12 +193,35 @@
             margin-top: 30px
 
 
+@media $mq-pc
+  .profile
+    &__image
+      width: 300px
+      margin-top: 80px
+
+    &_detail
+      &__btnList
+        > li
+          width: 78px
+          height: 78px
+          padding-top: 30px
+          cursor: pointer
+          &:hover
+            opacity: 0.8
+      &_contents
+        &__list
+          dt
+            font-size: 14px
+
+
 /* contact
 --------------------------------------------------*/
 
 .contact
   &__inner
     padding: 0 15px
+  &__notes
+    margin-top: 30px
   &_modal
     &__list
       dt
@@ -235,6 +275,18 @@
     text-align: left
 
 
+@media $mq-pc
+  .contact
+    &__notes
+      margin-top: 40px
+
+  .form
+    &__list
+      width: 650px
+      margin-left: auto
+      margin-right: auto
+
+
 /*----------------------------------------------------------
  modal
 ------------------------------------------------------------*/
@@ -256,6 +308,7 @@
       width: 30px
       height: 30px
       text-indent: -9999px
+      cursor: pointer
       &:after, &:before
         content: ""
         display: block

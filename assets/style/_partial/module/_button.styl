@@ -14,6 +14,9 @@
     line-height: 1em
     font-weight: bold
     font-family: $font_family_brandon
+    cursor: pointer
+    &:hover
+      opacity: 0.7
     &--blue
       @extend .btn-more
       border: 1px solid #597abd
@@ -36,6 +39,9 @@
     line-height: 1em
     box-sizing: border-box
     color: #fff
+    cursor: pointer
+    &:hover
+      opacity: 0.7
 
   // ページトップボタン
   &--pagetop
@@ -46,6 +52,7 @@
     border-top: 1px solid #eee
     border-bottom: 1px solid #eee
     text-indent: -9999px
+    cursor: pointer
     &:after
       content: ""
       display: block
@@ -58,3 +65,26 @@
       border-top: 3px solid #aaa
       border-left: 3px solid #aaa
       transform: rotate(45deg)
+
+
+@media $mq-pc
+  .btn
+    &--pagetop
+      position: fixed
+      bottom: 10px
+      right: 10px
+      width: 60px
+      height: 60px
+      padding: 0
+      z-index: 2
+      background: #ccc
+      border-width: 0
+      border-radius: 50%
+      opacity: 0.7
+      &:after
+        margin-left: -8px
+        border-color: #fff
+      &:hover
+        opacity: 0.5
+
+
