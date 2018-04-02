@@ -30,7 +30,7 @@ module.exports = {
       },
       ejs: {
         src: [
-          'assets/%type%/templates/*.ejs',
+          'assets/%type%/templates/**/*.ejs',
           '!assets/%type%/templates/_*/*.ejs'
         ],
         watch: ['assets/%type%/templates/**/*.ejs'],

@@ -4,7 +4,6 @@
 
 .header
   position: relative
-  z-index: 3
   height: 100vh
   &__logo
     position: absolute
@@ -14,18 +13,38 @@
     height: auto
     margin-left: -40%
 
+
+@media $mq-pc
+  .header
+    &__logo
+      top: auto
+      bottom: 130px
+      left: 80px
+      width: 650px
+      margin-left: 0
+
+
+/*----------------------------------------------------------
+ globalNav
+------------------------------------------------------------*/
+
 .globalNav
   position: fixed
   top: 0
   left: 0
-  z-index: 2
+  z-index: 3
   width: 100%
   &__header
     position: relative
-    height: 33px
-    background: rgba(255, 255, 255, 0.1) url("/common/img/logo_simple.svg") no-repeat 10px 50%
-    background-size: 70px auto
+    background: rgba(255, 255, 255, 0.1)
     padding: 6px 10px 5px
+  &__btnHome
+    display: block
+    width: 70px
+    height: 33px
+    background: url("/common/img/logo_simple.svg") no-repeat 0 50%
+    background-size: 70px auto
+    text-indent: -9999px
   &__btnToggle
     position: absolute
     top: 12px
@@ -55,6 +74,8 @@
       border-top: 1px solid #18449b
       &:first-child
         border-top-width: 0
+      &.current
+        text-shadow: 0 0 3px #fff
     a
       display: block
       padding: 17px 15px
@@ -82,14 +103,6 @@
 
 
 @media $mq-pc
-  .header
-    &__logo
-      top: auto
-      bottom: 130px
-      left: 80px
-      width: 650px
-      margin-left: 0
-
   .globalNav
     position: absolute
     background: #111

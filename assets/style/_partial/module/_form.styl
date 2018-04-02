@@ -1,3 +1,40 @@
 /*----------------------------------------------------------
  form
 ------------------------------------------------------------*/
+
+.form
+  &__list
+    margin-top: 50px
+    padding: 0 5px
+    > li + li
+      margin-top: 20px
+    .error
+      background: #c33
+  &__input
+    &--text
+      width: 100%
+      padding: 3px 15px 5px
+      border-width: 0
+      box-sizing: border-box
+      border-radius: 15px
+      font-size: 16px
+      text-align: left
+  &__textarea
+    width: 100%
+    min-height: 100px
+    padding: 3px 15px 5px
+    border-width: 0
+    border-radius: 14px
+    box-sizing: border-box
+    font-size: 16px
+    text-align: left
+  &__error
+    background: #f4a4a4
+
+
+@media $mq-pc
+  .form
+    &__list
+      width: 650px
+      margin-left: auto
+      margin-right: auto

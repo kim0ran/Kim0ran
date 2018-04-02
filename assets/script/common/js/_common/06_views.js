@@ -95,15 +95,19 @@
       this.$navListEl = {};
       this.$navAnchorEl = {};
       this.$toggleTriggerEl = {};
-      this.classOpened = 'active';
+      this.classOpenedTrigger = 'active';
+      this.classTargetCurrent = 'current';
+      this.offsetAnchorTargetArray = [];
       this.isAnimate = false;
       this.isOpen = false;
       this.offsetTopOpened = 0;
       this.speed = 500;
+      this.screenWidth = 0;
       return this;
     };
     var proto = constructor.prototype;
     proto.init = function(args) {
+      this.screenWidth = $(window).outerWidth();
       this.setEl(args.el);
       this.setStyle();
       this.setEvents();
@@ -112,7 +116,8 @@
     proto.setEl = function(el) {
       this.$el = $(el);
       this.$navListEl = this.$el.find('.js-globalNavList');
-      this.$navAnchorEl = this.$navListEl.find('a');
+      this.$navChildEl = this.$navListEl.children();
+      this.$navAnchorEl = this.$navChildEl.find('a');
       this.$toggleTriggerEl = $('.js-globalNavToggleTrigger');
       return this;
     };
@@ -154,7 +159,7 @@
           this.animateCloseNav();
         } else {
           this.animateOpenNav();
-        }
+        }  
         this.isAnimate = false;
       }
       return this;
@@ -168,8 +173,8 @@
         top: -this.offsetTopOpened,
         width: '100%'
       });
-      this.$el.addClass(this.classOpened);
-      this.$navListEl.slideToggle(this.speed, function() {
+      this.$el.addClass(this.classOpenedTrigger);
+      this.$navListEl.slideDown(this.speed, function() {
         that.isOpen = true;
       });
       return this;
@@ -183,13 +188,15 @@
         width: 'auto'
       });
       $(window).scrollTop(this.offsetTopOpened);
-      this.$navListEl.slideToggle(this.speed, function() {
-        that.$el.removeClass(that.classOpened);
+      this.$navListEl.slideUp(this.speed, function() {
+        that.$el.removeClass(that.classOpenedTrigger);
         that.isOpen = false;
       });
       return this;
     };
     proto.onScroll = function(scrollTop) {
+      this.setOffsetAnchorTarget();
+      this.setClassCurrent(scrollTop);
       if(!app.fn.isMediaSp()) {
         if($(window).outerHeight()-this.$el.outerHeight()< scrollTop) {
           this.$el.css({
@@ -205,14 +212,40 @@
       }
       return this;
     };
+    proto.setOffsetAnchorTarget = function() {
+      var that = this;
+      var heightAdjust = this.$navListEl.outerHeight();
+      this.$navAnchorEl.each(function(i) {
+        var $targetId = $($(this).attr('href'));
+        var offsetTop = $targetId.offset().top - (!app.fn.isMediaSp() ? heightAdjust : 0);
+        that.offsetAnchorTargetArray.push(offsetTop);
+        if(i === that.$navAnchorEl.length-1) {
+          that.offsetAnchorTargetArray.push(offsetTop + $targetId.outerHeight());
+        }
+      });
+      return this;
+    };
+    proto.setClassCurrent = function(scrollTop) {
+      this.$navListEl.find('.' + this.classTargetCurrent).removeClass(this.classTargetCurrent);
+      for(var i=0; i<this.offsetAnchorTargetArray.length; i++) {
+        if(this.offsetAnchorTargetArray[i] < scrollTop && this.offsetAnchorTargetArray[i+1] > scrollTop) {
+          this.$navChildEl.eq(i).addClass(this.classTargetCurrent);
+          break;
+        }
+      }
+      return this;
+    }
     proto.onResize = function() {
-      this.resetStyle();
-      this.setStyle();
+      if(this.screenWidth !== $(window).outerWidth()) {
+        this.screenWidth = $(window).outerWidth();
+        this.setStyle();
+        this.resetStyle();
+      }
       return this;
     };
     proto.resetStyle = function() {
       if(!app.fn.isMediaSp()) {
-        this.$el.removeClass(this.classOpened);
+        this.$el.removeClass(this.classOpenedTrigger);
         this.parentViewEl.css({
           position: 'static',
           top: 'auto',
