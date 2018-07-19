@@ -1,0 +1,31 @@
+<% var pageTitle = 'ギャラリー', pathPartials = '../_partials/'; %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include(pathPartials + 'head', { title: pageTitle }) %>
+<link rel="stylesheet" type="text/css" href="/common/css/gallery.css">
+</head>
+<body>
+
+<div class="page" id="PageView">
+
+  <%- include(pathPartials + 'header') %>
+
+  <%- include(pathPartials + 'globalNav') %>
+
+  <main class="main">
+
+
+
+
+
+  </main>
+
+  <%- include(pathPartials + 'footer') %>
+
+</div><!--/.page -->
+
+<%- include(pathPartials + 'common_js') %>
+<script src="/common/js/sub/gallery.js"></script>
+</body>
+</html>
